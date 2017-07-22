@@ -17,9 +17,12 @@ contract PatentToken is StandardToken, TokenDestructible {
     uint256 public INITIAL_SUPPLY = 1000;
     uint public TIME_SET = 20;
     uint public UBIQUITY = 1;
+    bytes32 public DEFAULT_STATUS = 'PENDING';
     uint public ubiquity;
     uint public timeRemaining;
     bytes32 public patentId;
+    bytes32 public patentStatus;
+
 
 	/**
 	 * @dev Constructor that gives msg.sender all of existing tokens.
@@ -32,6 +35,11 @@ contract PatentToken is StandardToken, TokenDestructible {
 		timeRemaining = TIME_SET;
 	    totalSupply = INITIAL_SUPPLY;
 	    balances[msg.sender] = INITIAL_SUPPLY;
+	    patentStatus = DEFAULT_STATUS;
+    }
+
+    function updatePatentStatus(bytes32 _updateStatus) {
+    	patentStatus = _updateStatus;
     }
 
 
@@ -48,5 +56,7 @@ contract PatentToken is StandardToken, TokenDestructible {
     function getTokenValue(address _patentValue) public returns (uint256) {
     	return 30; // need to add this calculation
     }
+
+    function transferWealth
 
 }
