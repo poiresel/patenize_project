@@ -6,7 +6,7 @@ contract EscrowContract {
     address buyer;
     address seller;
     address agent; // currently some trusted party like the USPTO
-    //address patentToken; // ERC20 address that will be used
+    address patentToken; // ERC20 address that will be used
     uint escrowedAmount;
     bool sellerSatisfied;
     bool buyerSatisfied;

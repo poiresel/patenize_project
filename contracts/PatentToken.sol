@@ -17,11 +17,11 @@ contract PatentToken is StandardToken, TokenDestructible {
     uint256 public INITIAL_SUPPLY = 1000;
     uint public TIME_SET = 20;
     uint public UBIQUITY = 1;
-    bytes32 public DEFAULT_STATUS = 'PENDING';
+    string public DEFAULT_STATUS = "PENDING";
     uint public ubiquity;
     uint public timeRemaining;
     bytes32 public patentId;
-    bytes32 public patentStatus;
+    string public patentStatus;
 
 
 	/**
@@ -38,10 +38,9 @@ contract PatentToken is StandardToken, TokenDestructible {
 	    patentStatus = DEFAULT_STATUS;
     }
 
-    function updatePatentStatus(bytes32 _updateStatus) {
+    function updatePatentStatus(string _updateStatus) {
     	patentStatus = _updateStatus;
     }
-
 
     function updateTimeSet(uint _updatedTime) public returns (bool) {
     	require(_updatedTime < timeRemaining);
@@ -57,6 +56,8 @@ contract PatentToken is StandardToken, TokenDestructible {
     	return 30; // need to add this calculation
     }
 
-    function transferWealth
+    function transferWealth() public returns (uint256) {
+    	return 30;
+    }
 
 }
