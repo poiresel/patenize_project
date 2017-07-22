@@ -1,26 +1,14 @@
-# React Truffle Box
+# Patenize Base Project - used React Truffle Box (https://github.com/truffle-box/react-box) as the init setup
 
-This box comes with everything you need to start using smart contracts from a react app. This is as barebones as it gets, so nothing stands in your way.
+1. Clone the repository
 
-## Installation
+2. Make sure you have truffle and ethereumjs-testrpc and they should be globally installed
 
-1. Install truffle and an ethereum client. For local development, try EthereumJS TestRPC.
-    ```javascript
-    npm install -g truffle // Version 3.0.5+ required.
-    npm install -g ethereumjs-testrpc
-    ```
+`npm install -g truffle // Version 3.0.5+ required.`
+`npm install -g ethereumjs-testrpc`
 
-2. Download box.
-    ```javascript
-    truffle unbox react
-    ```
-
-3. Compile and migrate the contracts.
-    ```javascript
-    truffle compile
-    truffle migrate
-    ```
-
+3. Run `npm install` to pick up the dependencies
+  
 4. Run the webpack server for front-end hot reloading. For now, smart contract changes must be manually recompiled and migrated.
     ```javascript
     npm run start
