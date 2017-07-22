@@ -1,4 +1,4 @@
-pragma solidity ^0.4.9;
+pragma solidity ^0.4.8;
 
 contract PatentSubmission {
 
@@ -42,8 +42,6 @@ contract PatentSubmission {
 
     //TODO: make this a payable function
     function submitPatent(bytes32 app) {
-        applications.push(app);
-        inReview[app] = false;
         applicationCount += 1;
     }
 
