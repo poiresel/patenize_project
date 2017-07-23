@@ -2,20 +2,25 @@ pragma solidity ^0.4.8;
 
 contract PatentStatus {
 
-    event PatentDecision (
+    event PatentDecision(
         bytes32 indexed patent_file,
         uint8 decision
+    );
+
+    event PatentSubmitted(
+        bytes32 indexed patent_file
     );
 
     uint256 multiplicative_group;
     uint256 modulo;
     uint256 reviewer_number;
+    address[] public reviewers;
 
     mapping (address => bool) is_reviewer;
     mapping (bytes32 => bool) submitted;
 
-    modifier onlyReviewer() {
-        if (!is_reviewer[msg.sender])
+    modifier onlyReviewer(address addr) {
+        if (!is_reviewer[addr])
             throw;
         _;
     }
@@ -27,6 +32,7 @@ contract PatentStatus {
     }
 
     function PatentStatus(uint256 group, uint256 mod, uint256 num, address[] approved_reviewers) {
+        reviewers = approved_reviewers;
         multiplicative_group = group;
         modulo = mod;
         reviewer_number = num;
@@ -37,10 +43,11 @@ contract PatentStatus {
 
     function submitPatent(bytes32 ipfs_hash) external {
         submitted[ipfs_hash] = true;
+        PatentSubmitted(ipfs_hash);
     }
 
     function decideOnPatent(bytes32 ipfs_hash, uint8 decision)
-        onlyReviewer()
+        onlyReviewer(msg.sender)
         isValidFile(ipfs_hash)
         external
     {
@@ -48,6 +55,14 @@ contract PatentStatus {
             submitted[ipfs_hash] = false;
         }
         PatentDecision(ipfs_hash, decision);
+    }
+
+    function isSubmitted(bytes32 ipfs_hash) returns(bool) {
+        return submitted[ipfs_hash];
+    }
+
+    function getReviewers() returns(address[]) {
+        return reviewers;
     }
 
 }
