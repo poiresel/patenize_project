@@ -31,7 +31,9 @@ contract('PatentStatus', function(accounts) {
           ipfs_hash = "\xe5\x00\xd5\xa4\xc9\x9a\x9doF\xd2G\xf2\x19%\xcd .\xb2@\n\xdfD\x11\x83\x8f\xd27\x1b\x04\x15\x0cP";
           //0 = rejected, 1 = approved, 2 = approved with swap
           decision = 1;
-          return patentStatusInstance.decideOnPatent(ipfs_hash, decision, {from: accounts[0]})
+          //empty address
+          address = "0x0";
+          return patentStatusInstance.decideOnPatent(ipfs_hash, decision, address, {from: accounts[0]})
       }).then(function(result) {
           for (var i = 0; i < result.logs.length; i++) {
               var log = result.logs[i];

@@ -4,7 +4,8 @@ contract PatentStatus {
 
     event PatentDecision(
         bytes32 indexed patent_file,
-        uint8 decision
+        uint8 decision,
+        address patent_token
     );
 
     event PatentSubmitted(
@@ -46,7 +47,7 @@ contract PatentStatus {
         PatentSubmitted(ipfs_hash);
     }
 
-    function decideOnPatent(bytes32 ipfs_hash, uint8 decision)
+    function decideOnPatent(bytes32 ipfs_hash, uint8 decision, address patent_token)
         onlyReviewer(msg.sender)
         isValidFile(ipfs_hash)
         external
@@ -54,7 +55,7 @@ contract PatentStatus {
         if (decision == 0) {
             submitted[ipfs_hash] = false;
         }
-        PatentDecision(ipfs_hash, decision);
+        PatentDecision(ipfs_hash, decision, patent_token);
     }
 
     function isSubmitted(bytes32 ipfs_hash) returns(bool) {
