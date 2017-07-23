@@ -20,15 +20,18 @@ contract PatentToken is StandardToken, TokenDestructible {
     string public DEFAULT_STATUS = "PENDING";
     uint public ubiquity;
     uint public timeRemaining;
-    bytes32 public patentId;
+    address public patentId; // original patent holder
     string public patentStatus;
+    uint public TOTAL_LIFE = 20;
 
+    // balances component
+    //balances <- put that into 1e18;
 
 	/**
 	 * @dev Constructor that gives msg.sender all of existing tokens.
 	 * balanceUpdates are done through transfers 
 	*/
-	function PatentToken(bytes32 _patentId) {
+	function PatentToken(address _patentId) {
 		// metadata for a token
 		patentId = _patentId;
 		ubiquity = UBIQUITY;
@@ -53,11 +56,6 @@ contract PatentToken is StandardToken, TokenDestructible {
     }
 
     function getTokenValue(address _patentValue) public returns (uint256) {
-    	return 30; // need to add this calculation
+        return timeRemaining * balances[_patentValue] / TOTAL_LIFE ; // need to add this calculation
     }
-
-    function transferWealth() public returns (uint256) {
-    	return 30;
-    }
-
 }
